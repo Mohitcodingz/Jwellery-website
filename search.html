@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+</head>
+<body>
+
+    <h2 id="resultTitle"></h2>
+
+    <p id="goldProduct" style="display:none;">
+        GOLD PRODUCT
+    </p>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const query = params.get("q");
+
+        const title = document.getElementById("resultTitle");
+        const goldProduct = document.getElementById("goldProduct");
+
+        if (query) {
+            title.innerText = `Results for "${query}"`;
+
+            if (query.toLowerCase().includes("gold")) {
+                goldProduct.style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+</html>
