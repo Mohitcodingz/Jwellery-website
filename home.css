@@ -6,38 +6,34 @@
     font-family: 'Playfair Display', serif;
 }
 
+/* body {
+    /* padding-top: 80px; */
+/* } */ 
+
 /* navbar styling */
 header {
     width: 100%;
-    height: 150px;
+    min-height: 150px;
     background: linear-gradient(to bottom,
-            #E6C878,
-            #fff3c4,
-            #ffffff)
+        #E6C878,
+        #ffffff);
 }
-
 .navbar {
     width: 100%;
     height: 80px;
     display: flex;
     align-items: center;
-    /* justify-content: center; */
-    /* background: linear-gradient(to bottom,
-            #E6C878,
-            #fff3c4,
-            white); */
+    justify-content: space-between; /* This pushes items apart naturally */
+    padding: 0 20px;
 }
 
 .logobar {
-    width: 270px;
+    width: auto; /* Changed from 270px to allow flexibility */
     height: 60px;
-    /* border: 1px solid black; */
-    margin-left: 30px;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
-
 .logobar img {
     width: 60px;
     height: 60px;
@@ -60,13 +56,15 @@ header {
 }
 
 .searchbar {
-    width: auto;
+    flex-grow: 1; /* Allows search bar to take available space */
+    max-width: 500px; /* Limits how wide it gets on desktop */
     height: 50px;
     border: 1px solid black;
-    margin-left: 350px;
+    margin: 0 20px; /* Balanced margin instead of massive left margin */
     border-radius: 15px;
     display: flex;
     align-items: center;
+    background-color: white;
 }
 
 .searchlogo {
@@ -82,17 +80,12 @@ header {
 }
 
 .searchbar input {
-    width: 400px;
-    height: 48px;
-    /* border: 1px solid rgb(255, 149, 149); */
-    /* border-radius: 15px; */
-    background-color: white;
-
+    width: 100%; /* Take up the rest of the searchbar width */
+    height: 100%;
+    padding: 0 10px;
     outline: none;
-    border: transparent;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
+    border: none;
+    background-color: transparent;
 }
 
 .miclogo {
@@ -111,15 +104,12 @@ header {
     cursor: pointer;
     height: 48px;
 }
-
 .rightNavbar {
-    width: 700px;
+    width: auto; /* Let the content define the width */
     height: 60px;
     display: flex;
     align-items: center;
-    justify-content: end;
-    gap: 30px;
-    padding-right: 30px;
+    gap: 20px; /* Reduced gap for better fit */
 }
 
 .rightNavbar button {
@@ -138,12 +128,345 @@ header {
 }
 
 /* styling for the slides */
-.slides{
+.slides {
+    width: 100%;
+    max-width: 1353px;
+    height: 500px;
+    background-color: red;
+    position: relative;
+    margin: 0 auto;
+    /* overflow: hidden; */
+}
+
+
+.slide{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.slider-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: rgb(255, 244, 94); /* your brand yellow */
+}
+
+/* .leftbutton,
+.rightbutton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.leftbutton {
+  left: 10px;
+}
+
+.rightbutton {
+  right: 10px;
+} */
+
+
+
+/* 📱 Mobile devices (up to 767px) */
+@media (max-width: 767px) {
+
+    header {
+        height: auto;
+    }
+
+    .navbar {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .logobar {
+        margin-left: 0;
+        justify-content: center;
+    }
+
+    .searchbar {
+        margin-left: 0;
+        width: 90%;
+        margin-top: 10px;
+    }
+
+    .searchbar input {
+        width: 100%;
+    }
+
+    .rightNavbar {
+        width: 100%;    
+        justify-content: center;
+        padding-right: 0;
+        margin-top: 10px;
+    }
+
+    .slides {
+        width: 100%;
+        height: 300px;
+    }
+}
+/* category section styling  */
+.category {
+    width: 100%;
+    min-height: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; /* Allows circles to move to the next line if space is tight */
+    gap: 20px;       /* Reduced gap for better fit */
+    background: linear-gradient(to bottom, #fffaea, #ffefbf, #feffb5, #ffefbf, #fffaea);
+    margin-top: 30px;
+    padding: 10px;
+}
+.category a .category-list {
+    width: 110px;    /* Slightly larger to fit text better */
+    height: 110px;
+    border-radius: 50%;
+    border: 1px solid #ffd700;
+    background: linear-gradient(to bottom, rgb(255, 244, 94), rgb(224, 202, 0));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center; /* Centers the text inside the circle */
+    font-size: 13px;    /* Slightly smaller font to prevent overflow */
+    line-height: 1.2;
+    color: rgb(105,79,10);
+    font-weight: bold; 
+    box-shadow: 0px 0px 5px #ffffff;
+    transition: transform 0.3s ease;
+}
+.category a{
+    text-decoration: none;
+}
+.category a .category-list{
+    width: 100px;
+    height:100px ;
+    border-radius:50px;
+    border: 1px solid #ffd700;
+    background: linear-gradient(to bottom, rgb(255, 244, 94), rgb(224, 202, 0));
+    /* background-color: rgb(255, 244, 94); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    color: rgb(105,79,10);
+    transform: scale(1);
+    box-shadow:  0px 0px 5px #ffffff;
+    font-weight: bold; 
+    animation: appearBig 1s  ease-in-out forwards;
+    animation-delay: 1s;
+    opacity: 0.9;
+    transform: scale(0.9);
+}
+@keyframes appearBig {
+    from{
+transform: scale(0.9);
+opacity: 0.9;
+
+    }
+    to{
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+.category a .category-list:hover{
+  box-shadow:  0px 0px 30px 1px #ffffff;
+  
+transform: scale(1.01);
+}
+/* .space{ */
+    /* position: absolute; */
+    /* width: 100%;
+    height: 80px;   
+} */
+.alert {
+    width: 100%;
+    height: auto;    /* Allow height to grow if text wraps */
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.insideAlert {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; /* Prevents text from cutting off on mobile */
+    width: 90%;      /* Gives some breathing room on the sides */
+    padding: 15px;
+    background: radial-gradient(rgb(255, 229, 204), rgb(255, 255, 255));
+    border-radius: 10px;
+    text-align: center;
+}
+
+.insideAlert p {
+    margin: 0 15px; /* Adds space between text and button */
+}
+.insideAlert button{
+      background-color: #a0f4ff;
+      color: rgb(0, 0, 0);
+border: 1px solid rgb(255, 205, 98);
+width: 50px;
+height: 35px;
+border-radius: 10px;
+text-align: center;
+margin-left: 10px;
+    }
+    .insideAlert button:hover{
+       cursor: pointer;
+         background-color: #73efff;
+ box-shadow: 0 0 5px rgb(102, 255, 102);
+    }
+/* styling for the New Arrivals */
+
+.cards{
+    width: 100%;
+    height: auto;
+    background-color: #feffb5;
+    overflow: hidden;
+}
+.cards h1{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:  30px 0 ;
+}
+/* styling for the about us page */
+.aboutus{
     width: 100%;
     height: 500px;
-    position: relative;
-    background-color: red;
+    background-color: #feffb5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.slide{
- object-fit: contain;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================== Responsive code =================================== */
+/* responsie code  for the 1343*210*/
+
+@media (min-width:1224px) {
+.searchbar {
+    margin-left: 120px;
+}
+}
+/* 📱 Tablets (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+
+    .searchbar {
+        margin-left: 40px;
+    }
+
+    .searchbar input {
+        width: 300px;
+    }
+
+    .slides {
+        width: 100%;
+        height: 400px;
+    }
+}
+
+/* 💻 Small laptops (1024px to 1223px) */
+@media (min-width: 1024px) and (max-width: 1223px) {
+
+    .searchbar {
+        margin-left: 80px;
+    }
+
+    .slides {
+        width: 100%;
+    }
+}
+
+/* 🖥️ Large screens (1224px and up) */
+@media (min-width: 1224px) {
+
+    .searchbar {
+        margin-left: 120px;
+    }
+
+    .slides {
+        width: 100%;
+    }
 }

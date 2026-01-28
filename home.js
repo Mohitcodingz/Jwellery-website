@@ -2,50 +2,50 @@
 let changeValue = document.getElementById("changeit");
 
 setTimeout(() => {
-    changeValue.style.opacity = "0";
-    setTimeout(() => {
-        changeValue.innerText = "Lavish!";
-        changeValue.style.opacity = "1";
-    }, 1000);
+  changeValue.style.opacity = "0";
+  setTimeout(() => {
+    changeValue.innerText = "Lavish!";
+    changeValue.style.opacity = "1";
+  }, 1000);
 }, 2000);
 
+// script to change automatically
+let slides = document.querySelectorAll(".slide");
+let dots = document.querySelectorAll(".dot");
+let index = 0;
+let interval;
 
-// SEARCH + MIC LOGIC
-const searchBtn = document.getElementById("searchBtn");
-const micBtn = document.getElementById("micBtn");
-const searchInput = document.getElementById("searchInput");
+// show slide function
+function showSlide(i) {
+  slides[index].pause();
+  slides[index].currentTime = 0;
+  slides[index].classList.remove("active");
+  dots[index].classList.remove("active");
 
-console.log("JS loaded", searchBtn, micBtn, searchInput);
+  index = i;
 
-// 🔍 SEARCH CLICK
-searchBtn.addEventListener("click", () => {
-    const query = searchInput.value.trim();
+  slides[index].classList.add("active");
+  dots[index].classList.add("active");
+  slides[index].play();
+}
 
-    if (!query) return;
+// autoplay
+function startSlider() {
+  interval = setInterval(() => {
+    let nextIndex = (index + 1) % slides.length;
+    showSlide(nextIndex);
+  }, 5000);
+}
 
-    // redirect to search page with query
-    window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+// dot click
+dots.forEach((dot, i) => {
+  dot.addEventListener("click", () => {
+    clearInterval(interval);
+    showSlide(i);
+    startSlider();
+  });
 });
-// ⌨️ ENTER KEY SUPPORT
-searchInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-        searchBtn.click();
-    }
-});
 
-// 🎤 MIC CLICK (Chrome only)
-micBtn.addEventListener("click", () => {
-    if (!("webkitSpeechRecognition" in window)) {
-        alert("Voice search not supported in this browser");
-        return;
-    }
-
-    const recognition = new webkitSpeechRecognition();
-    recognition.lang = "en-US";
-    recognition.start();
-
-    recognition.onresult = (event) => {
-        const spokenText = event.results[0][0].transcript;
-        searchInput.value = spokenText;
-    };
-});
+// start first slide
+slides[index].play();
+startSlider();
